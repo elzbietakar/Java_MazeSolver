@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.JFileChooser" name="fileChooser">
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -26,11 +30,11 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="MenuPanel" max="32767" attributes="0"/>
+                  <Component id="menuPanel" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Component id="ToolbarPanel" min="-2" max="-2" attributes="0"/>
+                      <Component id="toolbarPanel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="MazeVizualizationPanel" min="-2" max="-2" attributes="0"/>
+                      <Component id="mazeVizualizationPanel" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="23" max="32767" attributes="0"/>
@@ -41,11 +45,11 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-              <Component id="MenuPanel" min="-2" max="-2" attributes="0"/>
+              <Component id="menuPanel" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="ToolbarPanel" max="32767" attributes="0"/>
-                  <Component id="MazeVizualizationPanel" max="32767" attributes="0"/>
+                  <Component id="toolbarPanel" max="32767" attributes="0"/>
+                  <Component id="mazeVizualizationPanel" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="17" max="32767" attributes="0"/>
           </Group>
@@ -53,7 +57,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="MenuPanel">
+    <Container class="javax.swing.JPanel" name="menuPanel">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -67,9 +71,9 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="DescriptionLabel" min="-2" pref="382" max="-2" attributes="0"/>
+                  <Component id="descriptionLabel" min="-2" pref="382" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="AttachFileButton" min="-2" pref="116" max="-2" attributes="0"/>
+                  <Component id="attachFileButton" min="-2" pref="116" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -79,8 +83,8 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="AttachFileButton" min="-2" pref="39" max="-2" attributes="0"/>
-                      <Component id="DescriptionLabel" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="attachFileButton" min="-2" pref="39" max="-2" attributes="0"/>
+                      <Component id="descriptionLabel" min="-2" pref="25" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="14" max="32767" attributes="0"/>
               </Group>
@@ -88,22 +92,22 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="DescriptionLabel">
+        <Component class="javax.swing.JLabel" name="descriptionLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Znajd&#x17a; &#x15b;cie&#x17c;k&#x119; w labiryncie z u&#x17c;yciem algorytmu Dijkstry."/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="AttachFileButton">
+        <Component class="javax.swing.JButton" name="attachFileButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Za&#x142;&#x105;cz plik"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AttachFileButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="attachFileButtonActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JPanel" name="ToolbarPanel">
+    <Container class="javax.swing.JPanel" name="toolbarPanel">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -118,9 +122,9 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="ChooseStartButton" max="32767" attributes="0"/>
-                      <Component id="ChooseEndButton" alignment="1" max="32767" attributes="0"/>
-                      <Component id="FindPathButton" alignment="0" max="32767" attributes="0"/>
+                      <Component id="chooseStartButton" max="32767" attributes="0"/>
+                      <Component id="chooseEndButton" alignment="1" max="32767" attributes="0"/>
+                      <Component id="findPathButton" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -130,44 +134,44 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                  <Component id="ChooseStartButton" min="-2" pref="39" max="-2" attributes="0"/>
+                  <Component id="chooseStartButton" min="-2" pref="39" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="ChooseEndButton" min="-2" pref="38" max="-2" attributes="0"/>
+                  <Component id="chooseEndButton" min="-2" pref="38" max="-2" attributes="0"/>
                   <EmptySpace pref="127" max="32767" attributes="0"/>
-                  <Component id="FindPathButton" min="-2" pref="41" max="-2" attributes="0"/>
+                  <Component id="findPathButton" min="-2" pref="41" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="ChooseStartButton">
+        <Component class="javax.swing.JButton" name="chooseStartButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Wybierz START"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ChooseStartButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chooseStartButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="ChooseEndButton">
+        <Component class="javax.swing.JButton" name="chooseEndButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Wybierz KONIEC"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ChooseEndButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chooseEndButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="FindPathButton">
+        <Component class="javax.swing.JButton" name="findPathButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Znajd&#x17a; &#x15b;cie&#x17c;k&#x119;"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="FindPathButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="findPathButtonActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JPanel" name="MazeVizualizationPanel">
+    <Container class="javax.swing.JPanel" name="mazeVizualizationPanel">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">

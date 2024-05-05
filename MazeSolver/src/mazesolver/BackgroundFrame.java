@@ -4,6 +4,10 @@
  */
 package mazesolver;
 
+import java.io.File;
+import java.io.IOException;
+import javax.swing.JFileChooser;
+
 /**
  *
  * @author karas
@@ -15,8 +19,8 @@ public class BackgroundFrame extends javax.swing.JFrame {
      */
     public BackgroundFrame() {
         initComponents();
-        ToolbarPanel.setVisible(false);
-        MazeVizualizationPanel.setVisible(false);
+        toolbarPanel.setVisible(false);
+        mazeVizualizationPanel.setVisible(false);
     }
 
     /**
@@ -28,106 +32,107 @@ public class BackgroundFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        MenuPanel = new javax.swing.JPanel();
-        DescriptionLabel = new javax.swing.JLabel();
-        AttachFileButton = new javax.swing.JButton();
-        ToolbarPanel = new javax.swing.JPanel();
-        ChooseStartButton = new javax.swing.JButton();
-        ChooseEndButton = new javax.swing.JButton();
-        FindPathButton = new javax.swing.JButton();
-        MazeVizualizationPanel = new javax.swing.JPanel();
+        fileChooser = new javax.swing.JFileChooser();
+        menuPanel = new javax.swing.JPanel();
+        descriptionLabel = new javax.swing.JLabel();
+        attachFileButton = new javax.swing.JButton();
+        toolbarPanel = new javax.swing.JPanel();
+        chooseStartButton = new javax.swing.JButton();
+        chooseEndButton = new javax.swing.JButton();
+        findPathButton = new javax.swing.JButton();
+        mazeVizualizationPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        MenuPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        menuPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        DescriptionLabel.setText("Znajdź ścieżkę w labiryncie z użyciem algorytmu Dijkstry.");
+        descriptionLabel.setText("Znajdź ścieżkę w labiryncie z użyciem algorytmu Dijkstry.");
 
-        AttachFileButton.setText("Załącz plik");
-        AttachFileButton.addActionListener(new java.awt.event.ActionListener() {
+        attachFileButton.setText("Załącz plik");
+        attachFileButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AttachFileButtonActionPerformed(evt);
+                attachFileButtonActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout MenuPanelLayout = new javax.swing.GroupLayout(MenuPanel);
-        MenuPanel.setLayout(MenuPanelLayout);
-        MenuPanelLayout.setHorizontalGroup(
-            MenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(MenuPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
+        menuPanel.setLayout(menuPanelLayout);
+        menuPanelLayout.setHorizontalGroup(
+            menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(menuPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(DescriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(descriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(AttachFileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(attachFileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
         );
-        MenuPanelLayout.setVerticalGroup(
-            MenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(MenuPanelLayout.createSequentialGroup()
+        menuPanelLayout.setVerticalGroup(
+            menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(menuPanelLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addGroup(MenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(AttachFileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(DescriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(attachFileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(descriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        ToolbarPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        toolbarPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        ChooseStartButton.setText("Wybierz START");
-        ChooseStartButton.addActionListener(new java.awt.event.ActionListener() {
+        chooseStartButton.setText("Wybierz START");
+        chooseStartButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ChooseStartButtonActionPerformed(evt);
+                chooseStartButtonActionPerformed(evt);
             }
         });
 
-        ChooseEndButton.setText("Wybierz KONIEC");
-        ChooseEndButton.addActionListener(new java.awt.event.ActionListener() {
+        chooseEndButton.setText("Wybierz KONIEC");
+        chooseEndButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ChooseEndButtonActionPerformed(evt);
+                chooseEndButtonActionPerformed(evt);
             }
         });
 
-        FindPathButton.setText("Znajdź ścieżkę");
-        FindPathButton.addActionListener(new java.awt.event.ActionListener() {
+        findPathButton.setText("Znajdź ścieżkę");
+        findPathButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FindPathButtonActionPerformed(evt);
+                findPathButtonActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout ToolbarPanelLayout = new javax.swing.GroupLayout(ToolbarPanel);
-        ToolbarPanel.setLayout(ToolbarPanelLayout);
-        ToolbarPanelLayout.setHorizontalGroup(
-            ToolbarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ToolbarPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout toolbarPanelLayout = new javax.swing.GroupLayout(toolbarPanel);
+        toolbarPanel.setLayout(toolbarPanelLayout);
+        toolbarPanelLayout.setHorizontalGroup(
+            toolbarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(toolbarPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(ToolbarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ChooseStartButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ChooseEndButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(FindPathButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(toolbarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(chooseStartButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(chooseEndButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(findPathButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        ToolbarPanelLayout.setVerticalGroup(
-            ToolbarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ToolbarPanelLayout.createSequentialGroup()
+        toolbarPanelLayout.setVerticalGroup(
+            toolbarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(toolbarPanelLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(ChooseStartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(chooseStartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(ChooseEndButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(chooseEndButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
-                .addComponent(FindPathButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(findPathButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
         );
 
-        MazeVizualizationPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        mazeVizualizationPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        javax.swing.GroupLayout MazeVizualizationPanelLayout = new javax.swing.GroupLayout(MazeVizualizationPanel);
-        MazeVizualizationPanel.setLayout(MazeVizualizationPanelLayout);
-        MazeVizualizationPanelLayout.setHorizontalGroup(
-            MazeVizualizationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout mazeVizualizationPanelLayout = new javax.swing.GroupLayout(mazeVizualizationPanel);
+        mazeVizualizationPanel.setLayout(mazeVizualizationPanelLayout);
+        mazeVizualizationPanelLayout.setHorizontalGroup(
+            mazeVizualizationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 440, Short.MAX_VALUE)
         );
-        MazeVizualizationPanelLayout.setVerticalGroup(
-            MazeVizualizationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        mazeVizualizationPanelLayout.setVerticalGroup(
+            mazeVizualizationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
@@ -138,54 +143,67 @@ public class BackgroundFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(MenuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(menuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(ToolbarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(toolbarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(MazeVizualizationPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(mazeVizualizationPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(MenuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(ToolbarPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(MazeVizualizationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(toolbarPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(mazeVizualizationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void AttachFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AttachFileButtonActionPerformed
-        ToolbarPanel.setVisible(true);
-        MazeVizualizationPanel.setVisible(true);
-    }//GEN-LAST:event_AttachFileButtonActionPerformed
+    private void attachFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attachFileButtonActionPerformed
+        int returnVal = fileChooser.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File inputFile = fileChooser.getSelectedFile();
+            /*try {
+                // What to do with the file, e.g. display it in a TextArea
+          
+            } catch (IOException ex) {
+                System.out.println("Problem accessing file"+inputFile.getAbsolutePath());
+            }*/
+            toolbarPanel.setVisible(true);
+            mazeVizualizationPanel.setVisible(true);
+        } else {
+        System.out.println("Nie wybrano pliku.");
+        }
+    }//GEN-LAST:event_attachFileButtonActionPerformed
 
-    private void ChooseStartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChooseStartButtonActionPerformed
+    private void chooseStartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseStartButtonActionPerformed
         System.out.println("Choose START");
-    }//GEN-LAST:event_ChooseStartButtonActionPerformed
+    }//GEN-LAST:event_chooseStartButtonActionPerformed
 
-    private void ChooseEndButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChooseEndButtonActionPerformed
+    private void chooseEndButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseEndButtonActionPerformed
         System.out.println("Choose END");
-    }//GEN-LAST:event_ChooseEndButtonActionPerformed
+    }//GEN-LAST:event_chooseEndButtonActionPerformed
 
-    private void FindPathButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FindPathButtonActionPerformed
+    private void findPathButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findPathButtonActionPerformed
         System.out.println("Find path");
-    }//GEN-LAST:event_FindPathButtonActionPerformed
+    }//GEN-LAST:event_findPathButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AttachFileButton;
-    private javax.swing.JButton ChooseEndButton;
-    private javax.swing.JButton ChooseStartButton;
-    private javax.swing.JLabel DescriptionLabel;
-    private javax.swing.JButton FindPathButton;
-    private javax.swing.JPanel MazeVizualizationPanel;
-    private javax.swing.JPanel MenuPanel;
-    private javax.swing.JPanel ToolbarPanel;
+    private javax.swing.JButton attachFileButton;
+    private javax.swing.JButton chooseEndButton;
+    private javax.swing.JButton chooseStartButton;
+    private javax.swing.JLabel descriptionLabel;
+    private javax.swing.JFileChooser fileChooser;
+    private javax.swing.JButton findPathButton;
+    private javax.swing.JPanel mazeVizualizationPanel;
+    private javax.swing.JPanel menuPanel;
+    private javax.swing.JPanel toolbarPanel;
     // End of variables declaration//GEN-END:variables
 }
