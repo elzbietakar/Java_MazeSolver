@@ -14,6 +14,7 @@ public class MazeSolver {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+
         BackgroundFrame backgroundFrame = new BackgroundFrame();
         backgroundFrame.setVisible(true);
     }

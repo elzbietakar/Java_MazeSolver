@@ -4,14 +4,15 @@
  */
 package mazesolver;
 
+import java.awt.Color;
 import java.io.File;
-import java.io.IOException;
 import javax.swing.JFileChooser;
 
 /**
  *
  * @author karas
  */
+
 public class BackgroundFrame extends javax.swing.JFrame {
 
     /**
@@ -19,6 +20,15 @@ public class BackgroundFrame extends javax.swing.JFrame {
      */
     public BackgroundFrame() {
         initComponents();
+        Color col=new Color(234,112,44);
+        attachFileButton.setBackground(col);
+        chooseEndButton.setBackground(col);
+        chooseStartButton.setBackground(col);
+        findPathButton.setBackground(col);
+        col=new Color(255,238,228);
+        menuPanel.setBackground(col);
+        toolbarPanel.setBackground(col);
+        getContentPane().setBackground(Color.white);
         toolbarPanel.setVisible(false);
         mazeVizualizationPanel.setVisible(false);
     }
@@ -61,10 +71,10 @@ public class BackgroundFrame extends javax.swing.JFrame {
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(descriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(descriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
                 .addComponent(attachFileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14))
+                .addContainerGap())
         );
         menuPanelLayout.setVerticalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,7 +158,7 @@ public class BackgroundFrame extends javax.swing.JFrame {
                         .addComponent(toolbarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(mazeVizualizationPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,14 +179,15 @@ public class BackgroundFrame extends javax.swing.JFrame {
         int returnVal = fileChooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File inputFile = fileChooser.getSelectedFile();
-            /*try {
-                // What to do with the file, e.g. display it in a TextArea
-          
-            } catch (IOException ex) {
-                System.out.println("Problem accessing file"+inputFile.getAbsolutePath());
-            }*/
+            MazePanel mazePanel = new MazePanel();
+            mazeVizualizationPanel.setLayout(new java.awt.BorderLayout());
+            mazeVizualizationPanel.removeAll();
+            mazeVizualizationPanel.add(mazePanel);
+            mazeVizualizationPanel.revalidate();
+            mazeVizualizationPanel.setBackground(Color.white);
             toolbarPanel.setVisible(true);
             mazeVizualizationPanel.setVisible(true);
+            pack();
         } else {
         System.out.println("Nie wybrano pliku.");
         }
