@@ -50,7 +50,7 @@ public class MazePanel extends javax.swing.JPanel {
         
     };
     
-    private final int cellSize = 800/mazeMatrix.length;
+    private final int cellSize = 600/mazeMatrix.length;
     
     @Override
     protected void paintComponent(Graphics cell) {
