@@ -10,21 +10,21 @@ package mazesolver;
  */
 public class MazeElement {
     
-    public MazeElement(int row, int col, String type) {
+    public MazeElement(int row, int col, char type) {
         this.row = row;
         this.col = col;
         
         switch (type) {
-            case "X":
+            case 'X':
                 this.type = Type.WALL;
                 break;
-            case " ":
+            case ' ':
                 this.type = Type.PATH;
                 break;
-            case "P":
+            case 'P':
                 this.type = Type.START;
                 break;
-            case "K":
+            case 'K':
                 this.type = Type.STOP;
                 break;
             default:

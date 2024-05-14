@@ -6,6 +6,7 @@ package mazesolver;
 
 import java.awt.Color;
 import java.io.File;
+import java.io.IOException;
 import javax.swing.JFileChooser;
 
 /**
@@ -18,6 +19,7 @@ public class BackgroundFrame extends javax.swing.JFrame {
     /**
      * Creates new form BackgroundFrame
      */
+   
     public BackgroundFrame() {
         initComponents();
         Color col=new Color(234,112,44);
@@ -179,7 +181,17 @@ public class BackgroundFrame extends javax.swing.JFrame {
         int returnVal = fileChooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File inputFile = fileChooser.getSelectedFile();
-            MazePanel mazePanel = new MazePanel();
+            String filePath = inputFile.getAbsolutePath();
+            MazeReader mr = new MazeReader(filePath);
+            MazeData mazeData = new MazeData();
+            try {
+                mr.read(mazeData);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            MazePanel mazePanel = new MazePanel(mazeData);
+            
             mazeVizualizationPanel.setLayout(new java.awt.BorderLayout());
             mazeVizualizationPanel.removeAll();
             mazeVizualizationPanel.add(mazePanel);

@@ -16,7 +16,10 @@ public class MazePanel extends javax.swing.JPanel {
     /**
      * Creates new form MazePanel
      */
-    public MazePanel() {
+    private MazeData mazeData;
+
+    public MazePanel(MazeData mazeData) {
+        this.mazeData = mazeData;
         initComponents();
     }
 
@@ -40,24 +43,17 @@ public class MazePanel extends javax.swing.JPanel {
             .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-    private final int[][] mazeMatrix = {
-        {1, 1, 1, 1, 1, 1},
-        {1, 0, 0, 0, 0, 1},   
-        {1, 1, 1, 0, 1, 1},
-        {1, 0, 0, 0, 0, 1},
-        {1, 1, 0, 1, 0, 1},
-        {1, 1, 1, 1, 1, 1},
-        
-    };
+
     
-    private final int cellSize = 600/mazeMatrix.length;
+
     
     @Override
     protected void paintComponent(Graphics cell) {
         Color col=new Color(234,112,44);
-        for (int i = 0; i < mazeMatrix.length; i++) {
-            for (int j = 0; j < mazeMatrix[i].length; j++) {
-                if (mazeMatrix[i][j] == 1) {
+        int cellSize = 700/mazeData.getRows();
+        for (int i = 0; i < mazeData.getRows(); i++) {
+            for (int j = 0; j < mazeData.getCols(); j++) {
+                if (mazeData.elementsArray[i][j].getType() == Type.WALL) {
                     cell.setColor(col);
                     cell.fillRect(j * cellSize, i * cellSize, cellSize, cellSize);
                 }
@@ -67,7 +63,8 @@ public class MazePanel extends javax.swing.JPanel {
     
     @Override
     public Dimension getPreferredSize() {
-        return new Dimension(mazeMatrix[0].length * cellSize, mazeMatrix[0].length * cellSize);
+        int cellSize = 700/mazeData.getRows();
+        return new Dimension(mazeData.getRows() * cellSize, mazeData.getCols() * cellSize);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
