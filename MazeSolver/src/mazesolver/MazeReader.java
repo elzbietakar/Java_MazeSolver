@@ -26,7 +26,6 @@ public class MazeReader {
             while ((line = reader.readLine()) != null) {
                 if (row == 0)
                     col = line.length();
-           
                 row++;
             }
             mazeData.setRows(row);
@@ -41,10 +40,10 @@ public class MazeReader {
                 for (col = 0; col < line.length(); col++) {
                     char symbol = line.charAt(col);
                     mazeData.elementsArray[row][col] = new MazeElement(row, col, symbol);
-                    if (mazeData.elementsArray[row][col].getType()== Type.START){
+                    if (mazeData.elementsArray[row][col].getMazeCellType()== MazeCellType.START){
                         mazeData.setStartElement(mazeData.elementsArray[row][col]);
                     }
-                    if (mazeData.elementsArray[row][col].getType()== Type.STOP){
+                    if (mazeData.elementsArray[row][col].getMazeCellType()== MazeCellType.STOP){
                         mazeData.setEndElement(mazeData.elementsArray[row][col]);
                     }
                 }
@@ -52,16 +51,6 @@ public class MazeReader {
             }
         reader.close();
     }
-    
-    public int getRows() {
-        return rows;
-    }
-
-    public int getCols() {
-        return cols;
-    }
-    
+  
     private final String filePath;
-    private int rows;
-    private int cols;  
 }

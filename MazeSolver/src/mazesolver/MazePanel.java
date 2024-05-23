@@ -6,6 +6,7 @@ package mazesolver;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Toolkit;
 
 /**
  *
@@ -17,10 +18,21 @@ public class MazePanel extends javax.swing.JPanel {
      * Creates new form MazePanel
      */
     private MazeData mazeData;
+    Color wallCol = new Color(234,112,44);
+    Color startCol = new Color(43, 138, 106);
+    Color endCol = new Color (117, 35, 157);
+    int panelSize; //in pixels
+    int cellSize;
 
     public MazePanel(MazeData mazeData) {
         this.mazeData = mazeData;
+       
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        this.panelSize = (int)(0.8*screenSize.getHeight());
+        
+        this.cellSize = panelSize/mazeData.getRows();
         initComponents();
+        
     }
 
     /**
@@ -49,21 +61,26 @@ public class MazePanel extends javax.swing.JPanel {
     
     @Override
     protected void paintComponent(Graphics cell) {
-        Color col=new Color(234,112,44);
-        int cellSize = 700/mazeData.getRows();
         for (int i = 0; i < mazeData.getRows(); i++) {
             for (int j = 0; j < mazeData.getCols(); j++) {
-                if (mazeData.elementsArray[i][j].getType() == Type.WALL) {
-                    cell.setColor(col);
+                if (mazeData.elementsArray[i][j].getMazeCellType() == MazeCellType.WALL) {
+                    cell.setColor(wallCol);
                     cell.fillRect(j * cellSize, i * cellSize, cellSize, cellSize);
                 }
+                if (mazeData.elementsArray[i][j].getMazeCellType() == MazeCellType.START) {
+                    cell.setColor(startCol);
+                    cell.fillRect(j * cellSize, i * cellSize, cellSize, cellSize);
+                }   
+                if (mazeData.elementsArray[i][j].getMazeCellType() == MazeCellType.STOP) {
+                    cell.setColor(endCol);
+                    cell.fillRect(j * cellSize, i * cellSize, cellSize, cellSize);
+                }                  
             }
         }
     }
     
     @Override
     public Dimension getPreferredSize() {
-        int cellSize = 700/mazeData.getRows();
         return new Dimension(mazeData.getRows() * cellSize, mazeData.getCols() * cellSize);
     }
 

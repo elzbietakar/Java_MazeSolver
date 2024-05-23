@@ -16,16 +16,16 @@ public class MazeElement {
         
         switch (type) {
             case 'X':
-                this.type = Type.WALL;
+                this.type = MazeCellType.WALL;
                 break;
             case ' ':
-                this.type = Type.PATH;
+                this.type = MazeCellType.PATH;
                 break;
             case 'P':
-                this.type = Type.START;
+                this.type = MazeCellType.START;
                 break;
             case 'K':
-                this.type = Type.STOP;
+                this.type = MazeCellType.STOP;
                 break;
             default:
                 throw new IllegalArgumentException("Invalid type: " + type);
@@ -38,16 +38,16 @@ public class MazeElement {
     public int getCol() {
         return col;
     }
-    public Type getType() {
+    public MazeCellType getMazeCellType() {
         return type;
     }
   
-    public void changeType(Type type) {
+    public void changeMazeCellType(MazeCellType type) {
         this.type = type;
     }
     
     private int row;
     private int col;
-    private Type type;
+    private MazeCellType type;
 
 }
