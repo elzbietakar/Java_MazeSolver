@@ -15,6 +15,8 @@ public class MazeReader {
 
     public MazeReader(String filePath) {
         this.filePath = filePath;
+
+    //.replace("C:\\", "/mnt/c/").replace("\\", "/");;
     }
 
     public void read(MazeData mazeData) throws IOException {
@@ -40,10 +42,10 @@ public class MazeReader {
                 for (col = 0; col < line.length(); col++) {
                     char symbol = line.charAt(col);
                     mazeData.elementsArray[row][col] = new MazeElement(row, col, symbol);
-                    if (mazeData.elementsArray[row][col].getMazeCellType()== MazeCellType.START){
+                    if (mazeData.elementsArray[row][col].getMazeCellType()== MazeElementType.START){
                         mazeData.setStartElement(mazeData.elementsArray[row][col]);
                     }
-                    if (mazeData.elementsArray[row][col].getMazeCellType()== MazeCellType.STOP){
+                    if (mazeData.elementsArray[row][col].getMazeCellType()== MazeElementType.STOP){
                         mazeData.setEndElement(mazeData.elementsArray[row][col]);
                     }
                 }

@@ -43,6 +43,8 @@ public class BackgroundFrame extends javax.swing.JFrame {
         jLabel3.setVisible(false);
         jLabel4.setVisible(false);
         Restart.setVisible(false);
+        
+        new Thread(new TerminalInputListener(this)).start();
     }
 
     /**
@@ -231,6 +233,8 @@ public class BackgroundFrame extends javax.swing.JFrame {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File inputFile = fileChooser.getSelectedFile();
             String filePath = inputFile.getAbsolutePath();
+            System.out.println("GUI: Wybrano plik " + filePath);
+            
             MazeReader mr = new MazeReader(filePath);
             MazeData mazeData = new MazeData();
             try {
@@ -240,15 +244,8 @@ public class BackgroundFrame extends javax.swing.JFrame {
             }
 
             MazePanel mazePanel = new MazePanel(mazeData);
+            drawMazeVisualizationPanel(mazePanel);
             
-            mazeVizualizationPanel.setLayout(new java.awt.BorderLayout());
-            mazeVizualizationPanel.removeAll();
-            mazeVizualizationPanel.add(mazePanel);
-            mazeVizualizationPanel.revalidate();
-            mazeVizualizationPanel.setBackground(Color.white);
-            toolbarPanel.setVisible(true);
-            mazeVizualizationPanel.setVisible(true);
-            pack();
         } else {
         System.out.println("Nie wybrano pliku.");
         }
@@ -289,6 +286,16 @@ public class BackgroundFrame extends javax.swing.JFrame {
         System.out.println("Find path");
     }//GEN-LAST:event_findPathButton1ActionPerformed
 
+    public void drawMazeVisualizationPanel(MazePanel mazePanel) {
+        mazeVizualizationPanel.setLayout(new java.awt.BorderLayout());
+        mazeVizualizationPanel.removeAll();
+        mazeVizualizationPanel.add(mazePanel);
+        mazeVizualizationPanel.revalidate();
+        mazeVizualizationPanel.setBackground(Color.white);
+        toolbarPanel.setVisible(true);
+        mazeVizualizationPanel.setVisible(true);
+        pack();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Restart;

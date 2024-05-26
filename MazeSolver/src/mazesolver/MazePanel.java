@@ -63,15 +63,15 @@ public class MazePanel extends javax.swing.JPanel {
     protected void paintComponent(Graphics cell) {
         for (int i = 0; i < mazeData.getRows(); i++) {
             for (int j = 0; j < mazeData.getCols(); j++) {
-                if (mazeData.elementsArray[i][j].getMazeCellType() == MazeCellType.WALL) {
+                if (mazeData.elementsArray[i][j].getMazeCellType() == MazeElementType.WALL) {
                     cell.setColor(wallCol);
                     cell.fillRect(j * cellSize, i * cellSize, cellSize, cellSize);
                 }
-                if (mazeData.elementsArray[i][j].getMazeCellType() == MazeCellType.START) {
+                if (mazeData.elementsArray[i][j].getMazeCellType() == MazeElementType.START) {
                     cell.setColor(startCol);
                     cell.fillRect(j * cellSize, i * cellSize, cellSize, cellSize);
                 }   
-                if (mazeData.elementsArray[i][j].getMazeCellType() == MazeCellType.STOP) {
+                if (mazeData.elementsArray[i][j].getMazeCellType() == MazeElementType.STOP) {
                     cell.setColor(endCol);
                     cell.fillRect(j * cellSize, i * cellSize, cellSize, cellSize);
                 }                  

@@ -8,7 +8,7 @@ package mazesolver;
  *
  * @author karas
  */
-public enum MazeCellType {
+public enum MazeElementType {
         WALL, 
         PATH, 
         START, 

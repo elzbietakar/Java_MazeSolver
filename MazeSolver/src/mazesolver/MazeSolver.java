@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package mazesolver;
-import java.io.IOException;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -15,8 +15,7 @@ public class MazeSolver {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        BackgroundFrame backgroundFrame = new BackgroundFrame();
-        backgroundFrame.setVisible(true);
+        SwingUtilities.invokeLater(() -> new BackgroundFrame().setVisible(true));
     }
     
 }
