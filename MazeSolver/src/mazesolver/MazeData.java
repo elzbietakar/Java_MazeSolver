@@ -40,10 +40,21 @@ public class MazeData {
         this.endElement = endElement;
     }
     
+    public MazeElement getArrayElement(int row, int col) {
+        return elementsArray[row][col];
+    }
+    
+    public void setArrayElement(int row, int col, MazeElement arrayElement) {
+        this.elementsArray[row][col] = arrayElement;
+    }
+    
+    public void setElementsArray(MazeElement[][] elementsArray) {
+        this.elementsArray = elementsArray;
+    }
+
     private int rows;
     private int cols;
     private MazeElement startElement;
     private MazeElement endElement; 
-    public MazeElement[][] elementsArray;
-    
+    private MazeElement[][] elementsArray;    
 }
