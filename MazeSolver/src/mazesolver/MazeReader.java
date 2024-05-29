@@ -15,8 +15,6 @@ public class MazeReader {
 
     public MazeReader(String filePath) {
         this.filePath = filePath;
-
-    //.replace("C:\\", "/mnt/c/").replace("\\", "/");
     }
 
     public void read(MazeData mazeData) throws IOException {

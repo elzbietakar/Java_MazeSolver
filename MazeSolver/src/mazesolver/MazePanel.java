@@ -7,6 +7,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  *
@@ -32,6 +34,8 @@ public class MazePanel extends javax.swing.JPanel {
         
         this.cellSize = panelSize/mazeData.getRows();
         initComponents();
+        
+       // this.addMouseListener(new MouseAdapter() {});
         
     }
 

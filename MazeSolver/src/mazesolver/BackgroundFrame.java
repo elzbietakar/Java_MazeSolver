@@ -43,7 +43,6 @@ public class BackgroundFrame extends javax.swing.JFrame {
         jLabel3.setVisible(false);
         jLabel4.setVisible(false);
         Restart.setVisible(false);
-        
         new Thread(new TerminalInputListener(this)).start();
     }
 
@@ -233,9 +232,10 @@ public class BackgroundFrame extends javax.swing.JFrame {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File inputFile = fileChooser.getSelectedFile();
             String filePath = inputFile.getAbsolutePath();
-            System.out.println("GUI: Wybrano plik " + filePath);
+            String WSLfilePath = filePath;
+            System.out.println("GUI: Wybrano plik " + WSLfilePath);
             
-            MazeReader mr = new MazeReader(filePath);
+            MazeReader mr = new MazeReader(WSLfilePath);
             MazeData mazeData = new MazeData();
             try {
                 mr.read(mazeData);
@@ -253,6 +253,8 @@ public class BackgroundFrame extends javax.swing.JFrame {
 
     private void chooseStartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseStartButtonActionPerformed
         System.out.println("Choose START");
+        
+        
     }//GEN-LAST:event_chooseStartButtonActionPerformed
 
     private void chooseEndButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseEndButtonActionPerformed

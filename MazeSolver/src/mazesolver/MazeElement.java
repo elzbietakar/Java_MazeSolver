@@ -42,7 +42,7 @@ public class MazeElement {
         return type;
     }
   
-    public void changeMazeCellType(MazeElementType type) {
+    public void setMazeCellType(MazeElementType type) {
         this.type = type;
     }
     
