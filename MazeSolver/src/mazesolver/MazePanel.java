@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package mazesolver;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Toolkit;
@@ -20,9 +19,6 @@ public class MazePanel extends javax.swing.JPanel {
      * Creates new form MazePanel
      */
     private MazeData mazeData;
-    Color wallCol = new Color(234,112,44);
-    Color startCol = new Color(43, 138, 106);
-    Color endCol = new Color (117, 35, 157);
     int panelSize; //in pixels
     int cellSize;
 
@@ -60,27 +56,11 @@ public class MazePanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    
-
-    
     @Override
     protected void paintComponent(Graphics cell) {
-        for (int i = 0; i < mazeData.getRows(); i++) {
-            for (int j = 0; j < mazeData.getCols(); j++) {
-                if (mazeData.getArrayElement(i, j).getMazeCellType() == MazeElementType.WALL) {
-                    cell.setColor(wallCol);
-                    cell.fillRect(j * cellSize, i * cellSize, cellSize, cellSize);
-                }
-                if (mazeData.getArrayElement(i, j).getMazeCellType() == MazeElementType.START) {
-                    cell.setColor(startCol);
-                    cell.fillRect(j * cellSize, i * cellSize, cellSize, cellSize);
-                }   
-                if (mazeData.getArrayElement(i, j).getMazeCellType() == MazeElementType.STOP) {
-                    cell.setColor(endCol);
-                    cell.fillRect(j * cellSize, i * cellSize, cellSize, cellSize);
-                }                  
-            }
-        }
+        for (int i = 0; i < mazeData.getRows(); i++) 
+            for (int j = 0; j < mazeData.getCols(); j++) 
+                mazeData.getArrayElement(i, j).getMazeElementType().paintCell(cell, i, j, cellSize);
     }
     
     @Override

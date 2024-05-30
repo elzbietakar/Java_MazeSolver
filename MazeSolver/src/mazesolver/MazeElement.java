@@ -13,6 +13,7 @@ public class MazeElement {
     public MazeElement(int row, int col, char type) {
         this.row = row;
         this.col = col;
+        this.visited = false;
         
         switch (type) {
             case 'X':
@@ -25,7 +26,7 @@ public class MazeElement {
                 this.type = MazeElementType.START;
                 break;
             case 'K':
-                this.type = MazeElementType.STOP;
+                this.type = MazeElementType.END;
                 break;
             default:
                 throw new IllegalArgumentException("Invalid type: " + type);
@@ -38,7 +39,7 @@ public class MazeElement {
     public int getCol() {
         return col;
     }
-    public MazeElementType getMazeCellType() {
+    public MazeElementType getMazeElementType() {
         return type;
     }
   
@@ -46,8 +47,16 @@ public class MazeElement {
         this.type = type;
     }
     
+     public void visit () {
+        this.visited = true;
+    }
+     
+     public boolean isVisited () {
+        return visited;
+    }
+    
     private int row;
     private int col;
     private MazeElementType type;
-
+    private boolean visited;
 }

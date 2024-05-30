@@ -41,6 +41,9 @@ public class MazeData {
     }
     
     public MazeElement getArrayElement(int row, int col) {
+        if(row < 0 || row >= rows || col < 0 || col >= cols)
+            return null;
+        
         return elementsArray[row][col];
     }
     

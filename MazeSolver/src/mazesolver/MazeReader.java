@@ -40,10 +40,10 @@ public class MazeReader {
                 for (col = 0; col < line.length(); col++) {
                     char symbol = line.charAt(col);
                     mazeData.setArrayElement(row, col, new MazeElement(row, col, symbol));
-                    if (mazeData.getArrayElement(row, col).getMazeCellType()== MazeElementType.START){
+                    if (mazeData.getArrayElement(row, col).getMazeElementType()== MazeElementType.START){
                         mazeData.setStartElement(mazeData.getArrayElement(row, col));
                     }
-                    if (mazeData.getArrayElement(row, col).getMazeCellType()== MazeElementType.STOP){
+                    if (mazeData.getArrayElement(row, col).getMazeElementType()== MazeElementType.END){
                         mazeData.setEndElement(mazeData.getArrayElement(row, col));
                     }
                 }

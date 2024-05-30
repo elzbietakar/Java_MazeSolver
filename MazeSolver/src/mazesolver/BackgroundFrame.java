@@ -7,7 +7,9 @@ package mazesolver;
 import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedList;
 import javax.swing.*;
+
 
 /**
  *
@@ -19,6 +21,8 @@ public class BackgroundFrame extends javax.swing.JFrame {
     /**
      * Creates new form BackgroundFrame
      */
+    
+    private MazeData mazeData;
    
     public BackgroundFrame() {
         initComponents();
@@ -236,7 +240,7 @@ public class BackgroundFrame extends javax.swing.JFrame {
             System.out.println("GUI: Wybrano plik " + WSLfilePath);
             
             MazeReader mr = new MazeReader(WSLfilePath);
-            MazeData mazeData = new MazeData();
+            this.mazeData = new MazeData();
             try {
                 mr.read(mazeData);
             } catch (IOException e) {
@@ -286,6 +290,14 @@ public class BackgroundFrame extends javax.swing.JFrame {
         //attachFileButton.setVisible(false);
         
         System.out.println("Find path");
+        
+        LinkedList<MazeElement> pathList = new LinkedList<>();
+        PathFinder pathFinder = new PathFinder();
+        
+        pathFinder.findPath(mazeData, pathList);
+        
+        drawMazeVisualizationPanel(new MazePanel(mazeData));
+        
     }//GEN-LAST:event_findPathButton1ActionPerformed
 
     public void drawMazeVisualizationPanel(MazePanel mazePanel) {
@@ -315,4 +327,6 @@ public class BackgroundFrame extends javax.swing.JFrame {
     private javax.swing.JPanel menuPanel;
     private javax.swing.JPanel toolbarPanel;
     // End of variables declaration//GEN-END:variables
+
 }
+    
