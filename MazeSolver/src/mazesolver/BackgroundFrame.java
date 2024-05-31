@@ -9,6 +9,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
 import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Toolkit;
+import java.awt.Dimension;
 
 
 /**
@@ -21,10 +24,12 @@ public class BackgroundFrame extends javax.swing.JFrame {
     /**
      * Creates new form BackgroundFrame
      */
-    
+    private MazeReaderObserver observer;
     private MazeData mazeData;
    
-    public BackgroundFrame() {
+    public BackgroundFrame(MazeReaderObserver observer, MazeData mazeData) {
+        this.observer = observer;
+        this.mazeData = mazeData;
         initComponents();
         Color col=new Color(234,112,44);
         attachFileButton.setBackground(col);
@@ -93,7 +98,7 @@ public class BackgroundFrame extends javax.swing.JFrame {
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(descriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(descriptionLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(attachFileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -238,15 +243,7 @@ public class BackgroundFrame extends javax.swing.JFrame {
             String filePath = inputFile.getAbsolutePath();
             String WSLfilePath = filePath;
             System.out.println("GUI: Wybrano plik " + WSLfilePath);
-            
-            MazeReader mr = new MazeReader(WSLfilePath);
-            this.mazeData = new MazeData();
-            try {
-                mr.read(mazeData);
-            } catch (IOException e) {
-                System.out.println("IOException => " + e.getMessage());
-            }
-
+            observer.updateFilePath(filePath);
             MazePanel mazePanel = new MazePanel(mazeData);
             drawMazeVisualizationPanel(mazePanel);
             
@@ -300,16 +297,21 @@ public class BackgroundFrame extends javax.swing.JFrame {
         
     }//GEN-LAST:event_findPathButton1ActionPerformed
 
-    public void drawMazeVisualizationPanel(MazePanel mazePanel) {
-        mazeVizualizationPanel.setLayout(new java.awt.BorderLayout());
-        mazeVizualizationPanel.removeAll();
-        mazeVizualizationPanel.add(mazePanel);
-        mazeVizualizationPanel.revalidate();
-        mazeVizualizationPanel.setBackground(Color.white);
-        toolbarPanel.setVisible(true);
-        mazeVizualizationPanel.setVisible(true);
-        pack();
-    }
+public void drawMazeVisualizationPanel(MazePanel mazePanel) {
+    mazeVizualizationPanel.setLayout(new java.awt.BorderLayout());
+    mazeVizualizationPanel.removeAll();
+    
+    JScrollPane scrollPane = new JScrollPane(mazePanel);
+    scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+    scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+    
+    mazeVizualizationPanel.add(scrollPane, BorderLayout.CENTER);
+    mazeVizualizationPanel.revalidate();
+    mazeVizualizationPanel.setBackground(Color.white);
+    toolbarPanel.setVisible(true);
+    mazeVizualizationPanel.setVisible(true);
+    pack();
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Restart;

@@ -8,6 +8,7 @@ import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JScrollPane;
 
 /**
  *
@@ -26,10 +27,15 @@ public class MazePanel extends javax.swing.JPanel {
         this.mazeData = mazeData;
        
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        this.panelSize = (int)(0.8*screenSize.getHeight());
+        this.panelSize = (int)(screenSize.getHeight()-150);
         
         this.cellSize = panelSize/mazeData.getRows();
+        if (cellSize==0){
+        this.cellSize=1;
+        }
+        
         initComponents();
+
         
        // this.addMouseListener(new MouseAdapter() {});
         

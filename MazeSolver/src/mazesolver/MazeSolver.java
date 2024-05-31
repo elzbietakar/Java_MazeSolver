@@ -15,7 +15,9 @@ public class MazeSolver {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new BackgroundFrame().setVisible(true));
+        MazeData mazeData = new MazeData();
+        MazeReaderObserver observer = new MazeReaderObserver(mazeData);
+        SwingUtilities.invokeLater(() -> new BackgroundFrame(observer,mazeData).setVisible(true));
               
     }
     
