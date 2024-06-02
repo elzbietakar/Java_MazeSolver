@@ -250,7 +250,6 @@ public class BackgroundFrame extends javax.swing.JFrame {
             String filePath = inputFile.getAbsolutePath();
             System.out.println("GUI: Wybrano plik " + filePath);
             observer.updateFilePath(filePath);
-            //MazePanel mazePanel = new MazePanel(mazeData);
             mazePanel.redraw(mazeData);
             drawMazeVisualizationPanel(mazePanel);
         } else {

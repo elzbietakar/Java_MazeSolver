@@ -98,9 +98,11 @@ public class MazeData {
     }
      public void forgetFoundPath() {
         for (int i = 0; i < rows; i++) 
-            for (int j = 0; j < cols; j++) 
+            for (int j = 0; j < cols; j++)  {
+                elementsArray[i][j].setIsVisited(false);
                 if (elementsArray[i][j].getMazeElementType() == MazeElementType.FOUND_PATH)
                     elementsArray[i][j].setMazeCellType(MazeElementType.PATH);
+            }
     }
 
     private int rows;

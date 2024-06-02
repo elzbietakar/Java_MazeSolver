@@ -13,7 +13,7 @@ public class MazeElement {
     public MazeElement(int row, int col, char type) {
         this.row = row;
         this.col = col;
-        this.visited = false;
+        this.isVisited = false;
         
         switch (type) {
             case 'X':
@@ -47,12 +47,12 @@ public class MazeElement {
         this.type = type;
     }
     
-     public void visit () {
-        this.visited = true;
+     public void setIsVisited (boolean isVisited) {
+        this.isVisited = isVisited;
     }
      
-     public boolean isVisited () {
-        return visited;
+     public boolean getIsVisited () {
+        return isVisited;
     }
      
     public boolean isCorner(int rows, int cols) {
@@ -62,5 +62,5 @@ public class MazeElement {
     private int row;
     private int col;
     private MazeElementType type;
-    private boolean visited;
+    private boolean isVisited;
 }
