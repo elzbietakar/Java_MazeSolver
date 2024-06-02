@@ -54,6 +54,10 @@ public class MazeElement {
      public boolean isVisited () {
         return visited;
     }
+     
+    public boolean isCorner(int rows, int cols) {
+        return (row == 0 || row == rows - 1) && (col == 0 || col == cols - 1);
+    }
     
     private int row;
     private int col;

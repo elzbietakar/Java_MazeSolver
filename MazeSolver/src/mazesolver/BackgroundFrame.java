@@ -26,10 +26,17 @@ public class BackgroundFrame extends javax.swing.JFrame {
      */
     private MazeReaderObserver observer;
     private MazeData mazeData;
+    private MazePanel mazePanel;
+    private LinkedList<MazeElement> pathList;
+    private PathFinder pathFinder;
    
-    public BackgroundFrame(MazeReaderObserver observer, MazeData mazeData) {
+    public BackgroundFrame(MazeReaderObserver observer, MazeData mazeData, LinkedList<MazeElement> pathList, PathFinder pathFinder) {
+        this.pathList = pathList;
+        this.pathFinder = pathFinder;
         this.observer = observer;
         this.mazeData = mazeData;
+        mazePanel = new MazePanel();
+        
         initComponents();
         Color col=new Color(234,112,44);
         attachFileButton.setBackground(col);
@@ -241,12 +248,11 @@ public class BackgroundFrame extends javax.swing.JFrame {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File inputFile = fileChooser.getSelectedFile();
             String filePath = inputFile.getAbsolutePath();
-            String WSLfilePath = filePath;
-            System.out.println("GUI: Wybrano plik " + WSLfilePath);
+            System.out.println("GUI: Wybrano plik " + filePath);
             observer.updateFilePath(filePath);
-            MazePanel mazePanel = new MazePanel(mazeData);
+            //MazePanel mazePanel = new MazePanel(mazeData);
+            mazePanel.redraw(mazeData);
             drawMazeVisualizationPanel(mazePanel);
-            
         } else {
         System.out.println("Nie wybrano pliku.");
         }
@@ -254,12 +260,19 @@ public class BackgroundFrame extends javax.swing.JFrame {
 
     private void chooseStartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseStartButtonActionPerformed
         System.out.println("Choose START");
-        
+     
+        mazePanel.setChooseStartMode(true);
+        mazePanel.redraw(mazeData);
+        drawMazeVisualizationPanel(mazePanel);
         
     }//GEN-LAST:event_chooseStartButtonActionPerformed
 
     private void chooseEndButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseEndButtonActionPerformed
         System.out.println("Choose END");
+        
+        mazePanel.setChooseEndMode(true);
+        mazePanel.redraw(mazeData);
+        drawMazeVisualizationPanel(mazePanel);
     }//GEN-LAST:event_chooseEndButtonActionPerformed
 
     private void RestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RestartActionPerformed
@@ -271,6 +284,11 @@ public class BackgroundFrame extends javax.swing.JFrame {
         chooseEndButton.setVisible(true);
         findPathButton1.setVisible(true);
         Restart.setVisible(false);
+        
+        mazeData.forgetFoundPath();
+        pathList.clear();
+        mazePanel.redraw(mazeData);
+        drawMazeVisualizationPanel(mazePanel);
         //attachFileButton.setVisible(true);
         System.out.println("Restart");
     }//GEN-LAST:event_RestartActionPerformed
@@ -288,12 +306,14 @@ public class BackgroundFrame extends javax.swing.JFrame {
         
         System.out.println("Find path");
         
-        LinkedList<MazeElement> pathList = new LinkedList<>();
-        PathFinder pathFinder = new PathFinder();
-        
         pathFinder.findPath(mazeData, pathList);
+        System.out.println("Path was found");
         
-        drawMazeVisualizationPanel(new MazePanel(mazeData));
+        mazePanel.redraw(mazeData);
+        drawMazeVisualizationPanel(mazePanel);
+        
+        MazeSaver mazeSaver = new MazeSaver();
+        mazeSaver.saveToFile(pathList);
         
     }//GEN-LAST:event_findPathButton1ActionPerformed
 
@@ -329,6 +349,6 @@ public void drawMazeVisualizationPanel(MazePanel mazePanel) {
     private javax.swing.JPanel menuPanel;
     private javax.swing.JPanel toolbarPanel;
     // End of variables declaration//GEN-END:variables
-
+    
 }
     

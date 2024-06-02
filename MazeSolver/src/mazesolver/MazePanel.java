@@ -22,23 +22,39 @@ public class MazePanel extends javax.swing.JPanel {
     private MazeData mazeData;
     int panelSize; //in pixels
     int cellSize;
+    private boolean chooseStartMode = false;
+    private boolean chooseEndMode = false;
 
-    public MazePanel(MazeData mazeData) {
-        this.mazeData = mazeData;
-       
+
+    public MazePanel() {
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (chooseStartMode || chooseEndMode) {
+                    int col = e.getX() / cellSize;
+                    int row = e.getY() / cellSize;
+                    
+                    try {
+                        if (chooseStartMode == true)
+                            mazeData.setStartElement(mazeData.getArrayElement(row, col));      
+                        
+                        if (chooseEndMode == true)         
+                            mazeData.setEndElement(mazeData.getArrayElement(row, col));
+                            
+                    } catch (IllegalArgumentException ex) {
+                        System.err.println("Error: " + ex);
+                    }   
+                    System.out.println("Wybrano element: (" + row + ", " + col + ")");
+                    chooseStartMode = false;
+                    chooseEndMode = false;
+                    repaint();
+                }
+            }
+        });
+        
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        this.panelSize = (int)(screenSize.getHeight()-150);
-        
-        this.cellSize = panelSize/mazeData.getRows();
-        if (cellSize==0){
-        this.cellSize=1;
-        }
-        
-        initComponents();
+        this.panelSize = (int)(0.4* screenSize.getHeight());
 
-        
-       // this.addMouseListener(new MouseAdapter() {});
-        
     }
 
     /**
@@ -64,16 +80,31 @@ public class MazePanel extends javax.swing.JPanel {
 
     @Override
     protected void paintComponent(Graphics cell) {
+        System.out.println("MALUJE PANEL:");
         for (int i = 0; i < mazeData.getRows(); i++) 
             for (int j = 0; j < mazeData.getCols(); j++) 
-                mazeData.getArrayElement(i, j).getMazeElementType().paintCell(cell, i, j, cellSize);
+                mazeData.getArrayElement(i, j).getMazeElementType().paintCell(cell, j, i, cellSize);
     }
     
     @Override
     public Dimension getPreferredSize() {
         return new Dimension(mazeData.getRows() * cellSize, mazeData.getCols() * cellSize);
     }
-
+    
+    public void setChooseStartMode(boolean chooseStartMode) {
+        this.chooseStartMode = chooseStartMode;
+    }
+    
+    public void setChooseEndMode(boolean chooseEndMode) {
+        this.chooseEndMode = chooseEndMode;
+    }
+    
+    void redraw(MazeData mazeData) {
+        this.mazeData = mazeData;
+        this.cellSize = panelSize/mazeData.getRows();
+        initComponents();
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }

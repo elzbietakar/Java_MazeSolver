@@ -10,12 +10,17 @@ public class PathFinder {
     
     public void findPath(MazeData mazeData, LinkedList<MazeElement> pathList) {
         MazeElement nextElement, currentElement;
+        //System.out.println(1);
         pathList.add(mazeData.getStartElement());
+        mazeData.getStartElement().visit();
+        //System.out.println(2);
         
         while (!pathList.getLast().equals(mazeData.getEndElement())) { 
             currentElement = pathList.getLast();
+            //System.out.println(3.1);
             int row = currentElement.getRow();
             int col = currentElement.getCol();
+            //System.out.println(3.2);
            
 
             boolean validNextElementFound = false;
@@ -27,17 +32,23 @@ public class PathFinder {
                     pathList.add(nextElement);
                     System.out.println("ADD: (" + nextElement.getRow() + ", " + nextElement.getCol() + ")");
                     validNextElementFound = true;
+                    
                     break;
                 }
             }
-
+            //System.out.println(3.3);
             if (validNextElementFound == false) {
                 System.out.println("REMOVE: (" + currentElement.getRow() + ", " + currentElement.getCol() + ")");
                 pathList.removeLast();
             }
+            //System.out.println(3.4);
+            for (MazeElement p : pathList) {
+            System.out.print("(" + p.getRow() + ", " + p.getCol() + ") -> ");
+        }
+        System.out.println();
             
         }
-        
+        //System.out.println(4);
         for (MazeElement p : pathList) {
                 if (p.getMazeElementType() == MazeElementType.PATH)
                     mazeData.getArrayElement(p.getRow(), p.getCol()).setMazeCellType(MazeElementType.FOUND_PATH);

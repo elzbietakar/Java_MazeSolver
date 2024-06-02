@@ -26,6 +26,17 @@ import javax.swing.SwingUtilities;
             BufferedReader terminalReader = new BufferedReader(new InputStreamReader(System.in));
             String filePath;
             while ((filePath = terminalReader.readLine()) != null) {
+                /*
+                int returnVal = fileChooser.showOpenDialog(this);
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                    File inputFile = fileChooser.getSelectedFile();
+                    String filePath = inputFile.getAbsolutePath();
+                    System.out.println("GUI: Wybrano plik " + filePath);
+                    observer.updateFilePath(filePath);
+                    MazePanel mazePanel = new MazePanel(mazeData);
+                    drawMazeVisualizationPanel(mazePanel);
+            */
+               
                 String finalFilePath = filePath.replace("\"", "");
                 System.out.println("Terminal: Wybrano plik " + filePath);
                 SwingUtilities.invokeLater(() -> {
@@ -37,7 +48,8 @@ import javax.swing.SwingUtilities;
                         System.out.println("IOException => " + e.getMessage());
                     }
 
-                    MazePanel mazePanel = new MazePanel(mazeData);
+                    MazePanel mazePanel = new MazePanel();
+                    mazePanel.redraw(mazeData);
                     backgroundFrame.drawMazeVisualizationPanel(mazePanel);
                 });
             }
