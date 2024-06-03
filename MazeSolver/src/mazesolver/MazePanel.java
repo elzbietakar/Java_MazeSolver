@@ -19,7 +19,7 @@ public class MazePanel extends javax.swing.JPanel {
      * Creates new form MazePanel
      */
     private MazeData mazeData;
-    int panelSize; //in pixels
+    int panelSize; 
     int cellSize;
     private boolean chooseStartMode = false;
     private boolean chooseEndMode = false;
@@ -52,7 +52,7 @@ public class MazePanel extends javax.swing.JPanel {
         });
         
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        this.panelSize = (int)(0.4* screenSize.getHeight());
+        this.panelSize = (int)(0.8* screenSize.getHeight());
 
     }
 
@@ -101,6 +101,9 @@ public class MazePanel extends javax.swing.JPanel {
     void redraw(MazeData mazeData) {
         this.mazeData = mazeData;
         this.cellSize = panelSize/mazeData.getRows();
+        if (cellSize < 4) {
+            cellSize = 4;
+        }
         initComponents();
     }
     

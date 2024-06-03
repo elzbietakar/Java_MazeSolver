@@ -70,12 +70,12 @@ public class BinaryMazeReader extends MazeReader {
             }
 
             // Set start and end elements
-        MazeElement startElement = new MazeElement(entryX, entryY, 'P');
-        MazeElement endElement = new MazeElement(exitX, exitY, 'K');
+        MazeElement startElement = new MazeElement(entryY, entryX, 'P');
+        MazeElement endElement = new MazeElement(exitY, exitX, 'K');
         mazeData.setStartElement(startElement);
         mazeData.setEndElement(endElement);
-        mazeData.setArrayElement(entryX, entryY, startElement);
-        mazeData.setArrayElement(exitX, exitY, endElement);
+        mazeData.setArrayElement(entryY, entryX, startElement);
+        mazeData.setArrayElement(exitY, exitX, endElement);
         }
     }
 

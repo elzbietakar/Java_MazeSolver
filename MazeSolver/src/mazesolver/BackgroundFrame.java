@@ -43,6 +43,7 @@ public class BackgroundFrame extends javax.swing.JFrame {
         chooseEndButton.setBackground(col);
         chooseStartButton.setBackground(col);
         Restart.setBackground(col);
+        Save.setBackground(col);
         findPathButton1.setBackground(col);
         col=new Color(255,238,228);
         menuPanel.setBackground(col);
@@ -59,6 +60,9 @@ public class BackgroundFrame extends javax.swing.JFrame {
         jLabel3.setVisible(false);
         jLabel4.setVisible(false);
         Restart.setVisible(false);
+        Save.setVisible(false);
+        jScrollPane1.setVisible(false);
+
         new Thread(new TerminalInputListener(this)).start();
     }
 
@@ -84,6 +88,8 @@ public class BackgroundFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         findPathButton1 = new javax.swing.JButton();
+        Save = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
         mazeVizualizationPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -106,7 +112,7 @@ public class BackgroundFrame extends javax.swing.JFrame {
             .addGroup(menuPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(descriptionLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 289, Short.MAX_VALUE)
                 .addComponent(attachFileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -162,6 +168,14 @@ public class BackgroundFrame extends javax.swing.JFrame {
             }
         });
 
+        Save.setText("        Zapisz         ");
+        Save.setActionCommand("         Zapisz        ");
+        Save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaveActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout toolbarPanelLayout = new javax.swing.GroupLayout(toolbarPanel);
         toolbarPanel.setLayout(toolbarPanelLayout);
         toolbarPanelLayout.setHorizontalGroup(
@@ -176,7 +190,8 @@ public class BackgroundFrame extends javax.swing.JFrame {
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(findPathButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Restart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(Restart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Save, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         toolbarPanelLayout.setVerticalGroup(
@@ -194,25 +209,34 @@ public class BackgroundFrame extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
+                .addComponent(Save, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Restart, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(findPathButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
         );
 
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        jScrollPane1.setMaximumSize(new java.awt.Dimension(327670, 327670));
+
         mazeVizualizationPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        mazeVizualizationPanel.setPreferredSize(new java.awt.Dimension(4100, 4100));
 
         javax.swing.GroupLayout mazeVizualizationPanelLayout = new javax.swing.GroupLayout(mazeVizualizationPanel);
         mazeVizualizationPanel.setLayout(mazeVizualizationPanelLayout);
         mazeVizualizationPanelLayout.setHorizontalGroup(
             mazeVizualizationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 440, Short.MAX_VALUE)
+            .addGap(0, 4098, Short.MAX_VALUE)
         );
         mazeVizualizationPanelLayout.setVerticalGroup(
             mazeVizualizationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 4098, Short.MAX_VALUE)
         );
+
+        jScrollPane1.setViewportView(mazeVizualizationPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -220,13 +244,13 @@ public class BackgroundFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(menuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(toolbarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(mazeVizualizationPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                .addGap(16, 16, 16))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,10 +258,10 @@ public class BackgroundFrame extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(toolbarPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(mazeVizualizationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(toolbarPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -274,24 +298,6 @@ public class BackgroundFrame extends javax.swing.JFrame {
         drawMazeVisualizationPanel(mazePanel);
     }//GEN-LAST:event_chooseEndButtonActionPerformed
 
-    private void RestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RestartActionPerformed
-        jLabel1.setVisible(false);
-        jLabel2.setVisible(false);
-        jLabel3.setVisible(false);
-        jLabel4.setVisible(false);
-        chooseStartButton.setVisible(true);
-        chooseEndButton.setVisible(true);
-        findPathButton1.setVisible(true);
-        Restart.setVisible(false);
-        
-        mazeData.forgetFoundPath();
-        pathList.clear();
-        mazePanel.redraw(mazeData);
-        drawMazeVisualizationPanel(mazePanel);
-        //attachFileButton.setVisible(true);
-        System.out.println("Restart");
-    }//GEN-LAST:event_RestartActionPerformed
-
     private void findPathButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findPathButton1ActionPerformed
         jLabel1.setVisible(true);
         jLabel2.setVisible(true);
@@ -301,6 +307,7 @@ public class BackgroundFrame extends javax.swing.JFrame {
         chooseEndButton.setVisible(false);
         findPathButton1.setVisible(false);
         Restart.setVisible(true);
+        Save.setVisible(true);
         //attachFileButton.setVisible(false);
         
         System.out.println("Find path");
@@ -311,29 +318,47 @@ public class BackgroundFrame extends javax.swing.JFrame {
         mazePanel.redraw(mazeData);
         drawMazeVisualizationPanel(mazePanel);
         
-        MazeSaver mazeSaver = new MazeSaver();
-        mazeSaver.saveToFile(pathList);
         
     }//GEN-LAST:event_findPathButton1ActionPerformed
+
+    private void SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveActionPerformed
+        MazeSaver mazeSaver = new MazeSaver();
+        mazeSaver.saveToFile(pathList);
+    }//GEN-LAST:event_SaveActionPerformed
+
+    private void RestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RestartActionPerformed
+        jLabel1.setVisible(false);
+        jLabel2.setVisible(false);
+        jLabel3.setVisible(false);
+        jLabel4.setVisible(false);
+        chooseStartButton.setVisible(true);
+        chooseEndButton.setVisible(true);
+        findPathButton1.setVisible(true);
+        Restart.setVisible(false);
+        Save.setVisible(false);
+
+        mazeData.forgetFoundPath();
+        pathList.clear();
+        mazePanel.redraw(mazeData);
+        drawMazeVisualizationPanel(mazePanel);
+        System.out.println("Restart");
+    }//GEN-LAST:event_RestartActionPerformed
 
 public void drawMazeVisualizationPanel(MazePanel mazePanel) {
     mazeVizualizationPanel.setLayout(new java.awt.BorderLayout());
     mazeVizualizationPanel.removeAll();
-    
-    JScrollPane scrollPane = new JScrollPane(mazePanel);
-    scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-    scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-    
-    mazeVizualizationPanel.add(scrollPane, BorderLayout.CENTER);
+    mazeVizualizationPanel.add(mazePanel);
     mazeVizualizationPanel.revalidate();
     mazeVizualizationPanel.setBackground(Color.white);
     toolbarPanel.setVisible(true);
     mazeVizualizationPanel.setVisible(true);
-    pack();
+    jScrollPane1.setVisible(true);
+
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Restart;
+    private javax.swing.JButton Save;
     private javax.swing.JButton attachFileButton;
     private javax.swing.JButton chooseEndButton;
     private javax.swing.JButton chooseStartButton;
@@ -344,6 +369,7 @@ public void drawMazeVisualizationPanel(MazePanel mazePanel) {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel mazeVizualizationPanel;
     private javax.swing.JPanel menuPanel;
     private javax.swing.JPanel toolbarPanel;
