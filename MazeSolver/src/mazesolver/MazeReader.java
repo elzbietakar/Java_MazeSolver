@@ -22,6 +22,8 @@ public class MazeReader {
         int row = 0;
         int col = 0;
         
+        mazeData.resetStartEndElements();
+       
         BufferedReader reader = new BufferedReader(new FileReader(filePath));
             while ((line = reader.readLine()) != null) {
                 if (row == 0)

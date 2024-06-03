@@ -123,4 +123,13 @@ public class MazeData {
     private MazeElement endElement; 
     private MazeElement[][] elementsArray;    
 
+    public void resetStartEndElements() {
+        if (startElement != null) {
+            startElement = null;
+        }
+        if (endElement != null) {
+            endElement = null;
+        }
+    }
+
 }
