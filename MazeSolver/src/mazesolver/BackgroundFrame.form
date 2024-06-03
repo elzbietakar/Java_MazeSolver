@@ -72,7 +72,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="descriptionLabel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="289" max="32767" attributes="0"/>
+                  <EmptySpace pref="308" max="32767" attributes="0"/>
                   <Component id="attachFileButton" min="-2" pref="116" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -94,7 +94,7 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="descriptionLabel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Znajd&#x17a; &#x15b;cie&#x17c;k&#x119; w labiryncie z u&#x17c;yciem algorytmu Dijkstry."/>
+            <Property name="text" type="java.lang.String" value="Znajd&#x17a; &#x15b;cie&#x17c;k&#x119; w labiryncie z u&#x17c;yciem algorytmu DFS."/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="attachFileButton">

@@ -18,14 +18,10 @@ public class MazeReaderObserver implements FilePathObserver {
     }
 
     @Override
-    public void updateFilePath(String filePath) {
+    public void updateFilePath(String filePath) throws IOException {
         MazeReader reader = MazeReaderFactory.getMazeReader(filePath);
-        try {
-            reader.read(mazeData);
-            // Process the mazeData as needed
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        
+        reader.read(mazeData);
     }
 }
 

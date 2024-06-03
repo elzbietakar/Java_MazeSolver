@@ -52,6 +52,8 @@ public class MazeReader {
                 row++;
             }
         reader.close();
+        
+        mazeData.manager.notifyObservers(mazeData);
     }
   
     protected final String filePath;

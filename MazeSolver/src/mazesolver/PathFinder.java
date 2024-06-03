@@ -4,15 +4,16 @@
  */
 package mazesolver;
 
+import java.io.IOException;
 import java.util.LinkedList;
 
 public class PathFinder {
     
-    public void findPath(MazeData mazeData, LinkedList<MazeElement> pathList) {
+    public void findPath(MazeData mazeData, LinkedList<MazeElement> pathList) throws IOException {
+        
         MazeElement nextElement, currentElement;
         pathList.add(mazeData.getStartElement());
         mazeData.getStartElement().setIsVisited(true);
-        
         while (!pathList.getLast().equals(mazeData.getEndElement())) { 
             currentElement = pathList.getLast();
             int row = currentElement.getRow();
@@ -34,17 +35,12 @@ public class PathFinder {
             if (validNextElementFound == false) {
                 System.out.println("REMOVE: (" + currentElement.getRow() + ", " + currentElement.getCol() + ")");
                 pathList.removeLast();
-            }
-            for (MazeElement p : pathList) {
-            System.out.print("(" + p.getRow() + ", " + p.getCol() + ") -> ");
+            }            
         }
-        System.out.println();
-            
-        }
-        for (MazeElement p : pathList) {
-                if (p.getMazeElementType() == MazeElementType.PATH)
-                    mazeData.getArrayElement(p.getRow(), p.getCol()).setMazeCellType(MazeElementType.FOUND_PATH);
-            }
+        for (MazeElement p : pathList)
+            if (p.getMazeElementType() == MazeElementType.PATH)
+                mazeData.getArrayElement(p.getRow(), p.getCol()).setMazeCellType(MazeElementType.FOUND_PATH);
+        mazeData.manager.notifyObservers(mazeData);
     }
     
     public boolean isValid(MazeElement mazeElement) {

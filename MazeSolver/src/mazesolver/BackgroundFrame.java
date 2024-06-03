@@ -13,13 +13,12 @@ import java.awt.BorderLayout;
 import java.awt.Toolkit;
 import java.awt.Dimension;
 
-
 /**
  *
  * @author karas
  */
 
-public class BackgroundFrame extends javax.swing.JFrame {
+public class BackgroundFrame extends javax.swing.JFrame implements MazeDataObserver{
 
     /**
      * Creates new form BackgroundFrame
@@ -36,6 +35,7 @@ public class BackgroundFrame extends javax.swing.JFrame {
         this.observer = observer;
         this.mazeData = mazeData;
         mazePanel = new MazePanel();
+        this.mazeData.manager.addObserver(this);
         
         initComponents();
         Color col=new Color(234,112,44);
@@ -62,8 +62,6 @@ public class BackgroundFrame extends javax.swing.JFrame {
         Restart.setVisible(false);
         Save.setVisible(false);
         jScrollPane1.setVisible(false);
-
-        new Thread(new TerminalInputListener(this)).start();
     }
 
     /**
@@ -96,7 +94,7 @@ public class BackgroundFrame extends javax.swing.JFrame {
 
         menuPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        descriptionLabel.setText("Znajdź ścieżkę w labiryncie z użyciem algorytmu Dijkstry.");
+        descriptionLabel.setText("Znajdź ścieżkę w labiryncie z użyciem algorytmu DFS.");
 
         attachFileButton.setText("Załącz plik");
         attachFileButton.addActionListener(new java.awt.event.ActionListener() {
@@ -112,7 +110,7 @@ public class BackgroundFrame extends javax.swing.JFrame {
             .addGroup(menuPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(descriptionLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 289, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 308, Short.MAX_VALUE)
                 .addComponent(attachFileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -272,12 +270,13 @@ public class BackgroundFrame extends javax.swing.JFrame {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File inputFile = fileChooser.getSelectedFile();
             String filePath = inputFile.getAbsolutePath();
-            System.out.println("GUI: Wybrano plik " + filePath);
-            observer.updateFilePath(filePath);
-            mazePanel.redraw(mazeData);
-            drawMazeVisualizationPanel(mazePanel);
+            System.out.println("GUI: uploaded file " + filePath);
+            
+            try {
+                observer.updateFilePath(filePath);
+            } catch (IOException ex) {System.err.println(ex);}
         } else {
-        System.out.println("Nie wybrano pliku.");
+        System.out.println("No file has been selected");
         }
     }//GEN-LAST:event_attachFileButtonActionPerformed
 
@@ -285,17 +284,12 @@ public class BackgroundFrame extends javax.swing.JFrame {
         System.out.println("Choose START");
      
         mazePanel.setChooseStartMode(true);
-        mazePanel.redraw(mazeData);
-        drawMazeVisualizationPanel(mazePanel);
-        
     }//GEN-LAST:event_chooseStartButtonActionPerformed
 
     private void chooseEndButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseEndButtonActionPerformed
         System.out.println("Choose END");
         
         mazePanel.setChooseEndMode(true);
-        mazePanel.redraw(mazeData);
-        drawMazeVisualizationPanel(mazePanel);
     }//GEN-LAST:event_chooseEndButtonActionPerformed
 
     private void findPathButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findPathButton1ActionPerformed
@@ -308,22 +302,21 @@ public class BackgroundFrame extends javax.swing.JFrame {
         findPathButton1.setVisible(false);
         Restart.setVisible(true);
         Save.setVisible(true);
-        //attachFileButton.setVisible(false);
         
         System.out.println("Find path");
         
-        pathFinder.findPath(mazeData, pathList);
-        System.out.println("Path was found");
+        try {
+            pathFinder.findPath(mazeData, pathList);
+            
+        } catch (IOException ex) {System.err.println(ex);}
         
-        mazePanel.redraw(mazeData);
-        drawMazeVisualizationPanel(mazePanel);
-        
-        
+        System.out.println("Path was found");   
     }//GEN-LAST:event_findPathButton1ActionPerformed
 
     private void SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveActionPerformed
         MazeSaver mazeSaver = new MazeSaver();
         mazeSaver.saveToFile(pathList);
+        System.out.println("Path was saved");  
     }//GEN-LAST:event_SaveActionPerformed
 
     private void RestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RestartActionPerformed
@@ -339,8 +332,7 @@ public class BackgroundFrame extends javax.swing.JFrame {
 
         mazeData.forgetFoundPath();
         pathList.clear();
-        mazePanel.redraw(mazeData);
-        drawMazeVisualizationPanel(mazePanel);
+
         System.out.println("Restart");
     }//GEN-LAST:event_RestartActionPerformed
 
@@ -354,6 +346,13 @@ public void drawMazeVisualizationPanel(MazePanel mazePanel) {
     mazeVizualizationPanel.setVisible(true);
     jScrollPane1.setVisible(true);
 
+}
+
+@Override
+public void dataChanged(MazeData mazeData) {
+    mazePanel.redraw(mazeData);
+    drawMazeVisualizationPanel(mazePanel);
+    
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -14,10 +14,10 @@ import javax.swing.SwingUtilities;
  * @author karas
  */
  public class TerminalInputListener implements Runnable {
-    private final BackgroundFrame backgroundFrame;
+    private MazeReaderObserver observer;
 
-    public TerminalInputListener(BackgroundFrame backgroundFrame) {
-        this.backgroundFrame = backgroundFrame;
+    public TerminalInputListener(MazeReaderObserver observer) {
+        this.observer = observer;
     }
 
     @Override
@@ -26,32 +26,13 @@ import javax.swing.SwingUtilities;
             BufferedReader terminalReader = new BufferedReader(new InputStreamReader(System.in));
             String filePath;
             while ((filePath = terminalReader.readLine()) != null) {
-                /*
-                int returnVal = fileChooser.showOpenDialog(this);
-                if (returnVal == JFileChooser.APPROVE_OPTION) {
-                    File inputFile = fileChooser.getSelectedFile();
-                    String filePath = inputFile.getAbsolutePath();
-                    System.out.println("GUI: Wybrano plik " + filePath);
-                    observer.updateFilePath(filePath);
-                    MazePanel mazePanel = new MazePanel(mazeData);
-                    drawMazeVisualizationPanel(mazePanel);
-            */
-               
+             
                 String finalFilePath = filePath.replace("\"", "");
-                System.out.println("Terminal: Wybrano plik " + filePath);
-                SwingUtilities.invokeLater(() -> {
-                    MazeReader mr = new MazeReader(finalFilePath);
-                    MazeData mazeData = new MazeData();
-                    try {
-                        mr.read(mazeData);
-                    } catch (IOException e) {
-                        System.out.println("IOException => " + e.getMessage());
-                    }
-
-                    MazePanel mazePanel = new MazePanel();
-                    mazePanel.redraw(mazeData);
-                    backgroundFrame.drawMazeVisualizationPanel(mazePanel);
-                });
+                System.out.println("Terminal: uploaded file " + finalFilePath);
+                
+                try {
+                    observer.updateFilePath(finalFilePath);
+                } catch (IOException ex) {System.err.println(ex);}
             }
         } catch (IOException ex) {}
     }

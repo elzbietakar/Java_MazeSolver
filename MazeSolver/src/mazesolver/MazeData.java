@@ -9,6 +9,11 @@ package mazesolver;
  * @author karas
  */
 public class MazeData {
+    public MazeDataObserverManager manager;
+    
+    public MazeData () {
+        this.manager = new MazeDataObserverManager();
+    }
     
     public int getRows() {
         return rows;
@@ -54,6 +59,9 @@ public class MazeData {
             
             startElement = newStartElement;
             startElement.setMazeCellType(MazeElementType.START);
+            
+            System.out.println("New START: (" + endElement.getRow() + ", " + endElement.getCol() + ")");
+            manager.notifyObservers(this);
         }
     }
 
@@ -79,6 +87,9 @@ public class MazeData {
             
             endElement = newEndElement;
             endElement.setMazeCellType(MazeElementType.END); 
+            
+            System.out.println("New END: (" + endElement.getRow() + ", " + endElement.getCol() + ")");
+            manager.notifyObservers(this);
         }
     }
     
@@ -103,6 +114,7 @@ public class MazeData {
                 if (elementsArray[i][j].getMazeElementType() == MazeElementType.FOUND_PATH)
                     elementsArray[i][j].setMazeCellType(MazeElementType.PATH);
             }
+        manager.notifyObservers(this);
     }
 
      private boolean hasExit(MazeElement mazeElement) {
@@ -117,12 +129,6 @@ public class MazeData {
         return element != null && element.getMazeElementType() == MazeElementType.PATH;
     }
      
-    private int rows;
-    private int cols;
-    private MazeElement startElement;
-    private MazeElement endElement; 
-    private MazeElement[][] elementsArray;    
-
     public void resetStartEndElements() {
         if (startElement != null) {
             startElement = null;
@@ -131,5 +137,10 @@ public class MazeData {
             endElement = null;
         }
     }
-
+    
+    private int rows;
+    private int cols;
+    private MazeElement startElement;
+    private MazeElement endElement; 
+    private MazeElement[][] elementsArray;    
 }

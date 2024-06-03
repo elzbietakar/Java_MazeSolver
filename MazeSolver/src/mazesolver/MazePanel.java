@@ -43,7 +43,6 @@ public class MazePanel extends javax.swing.JPanel {
                     } catch (IllegalArgumentException ex) {
                         System.err.println("Error: " + ex);
                     }   
-                    System.out.println("Wybrano element: (" + row + ", " + col + ")");
                     chooseStartMode = false;
                     chooseEndMode = false;
                     repaint();
@@ -79,7 +78,6 @@ public class MazePanel extends javax.swing.JPanel {
 
     @Override
     protected void paintComponent(Graphics cell) {
-        System.out.println("MALUJE PANEL:");
         for (int i = 0; i < mazeData.getRows(); i++) 
             for (int j = 0; j < mazeData.getCols(); j++) 
                 mazeData.getArrayElement(i, j).getMazeElementType().paintCell(cell, j, i, cellSize);

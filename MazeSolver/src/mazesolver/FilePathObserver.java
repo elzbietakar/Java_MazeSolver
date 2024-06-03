@@ -4,10 +4,12 @@
  */
 package mazesolver;
 
+import java.io.IOException;
+
 /**
  *
  * @author pawel
  */
 public interface FilePathObserver {
-    void updateFilePath(String filePath);
+    void updateFilePath(String filePath) throws IOException;
 }

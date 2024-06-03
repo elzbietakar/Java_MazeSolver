@@ -24,12 +24,11 @@ public class MazeSaver {
             writer.write("START\n");
             if (pathList.size() > 1) {
                 Direction currentDirection = determineDirection(pathList.get(0), pathList.get(1));
-                //System.out.println(currentDirection);
                 int steps = 1;
 
                 for (int i = 1; i < pathList.size() - 1; i++) {
                     Direction nextDirection = determineDirection(pathList.get(i), pathList.get(i + 1));
-                    System.out.println(nextDirection);
+       
                     if (nextDirection == currentDirection) {
                         steps++;
                     } else {

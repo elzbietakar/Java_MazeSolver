@@ -19,6 +19,7 @@ public class MazeSolver {
         MazeReaderObserver observer = new MazeReaderObserver(mazeData);
         LinkedList<MazeElement> pathList = new LinkedList<>();
         PathFinder pathFinder = new PathFinder();
+        new Thread(new TerminalInputListener(observer)).start();
         SwingUtilities.invokeLater(() -> new BackgroundFrame(observer, mazeData, pathList, pathFinder).setVisible(true));
               
     }
