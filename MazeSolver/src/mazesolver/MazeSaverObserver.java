@@ -8,21 +8,17 @@ package mazesolver;
  *
  * @author pawel
  */
-
-
-import java.util.LinkedList;
-
 public class MazeSaverObserver implements FilePathObserver {
-    private LinkedList<MazeElement> pathList;
+    private PathData pathData;
 
-    public MazeSaverObserver(LinkedList<MazeElement> pathList) {
-        this.pathList = pathList;
+    public MazeSaverObserver(PathData pathData) {
+        this.pathData = pathData;
     }
 
     @Override
     public void updateFilePath(String filePath) {
         MazeSaver saver = MazeSaverFactory.getMazeSaver(filePath);
-            saver.saveToFile(pathList);
+            saver.saveToFile(pathData);
 
         }
     }

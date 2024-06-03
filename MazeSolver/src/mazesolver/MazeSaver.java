@@ -9,6 +9,7 @@ package mazesolver;
  * @author karas
  */
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.LinkedList;
@@ -19,15 +20,16 @@ public class MazeSaver {
         UP, DOWN, LEFT, RIGHT
     }
 
-    public void saveToFile(LinkedList<MazeElement> pathList) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("savedPath.txt"))) {
+    public void saveToFile(PathData pathData) {
+        File file = new File("savedPath.txt");
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             writer.write("START\n");
-            if (pathList.size() > 1) {
-                Direction currentDirection = determineDirection(pathList.get(0), pathList.get(1));
+            if (pathData.size() > 1) {
+                Direction currentDirection = determineDirection(pathData.get(0), pathData.get(1));
                 int steps = 1;
 
-                for (int i = 1; i < pathList.size() - 1; i++) {
-                    Direction nextDirection = determineDirection(pathList.get(i), pathList.get(i + 1));
+                for (int i = 1; i < pathData.size() - 1; i++) {
+                    Direction nextDirection = determineDirection(pathData.get(i), pathData.get(i + 1));
        
                     if (nextDirection == currentDirection) {
                         steps++;
@@ -41,6 +43,8 @@ public class MazeSaver {
                 writer.write("FORWARD " + steps + "\n");
             }
             writer.write("STOP\n");
+            
+            System.out.println("Path saved to: " + file.getAbsolutePath());
         } catch (IOException e) {
             e.printStackTrace();
         }

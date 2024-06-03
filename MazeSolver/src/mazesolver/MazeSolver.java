@@ -17,10 +17,11 @@ public class MazeSolver {
     public static void main(String[] args) {
         MazeData mazeData = new MazeData();
         MazeReaderObserver observer = new MazeReaderObserver(mazeData);
-        LinkedList<MazeElement> pathList = new LinkedList<>();
+        PathData pathData = new PathData();
+        //LinkedList<MazeElement> pathList = new LinkedList<>();
         PathFinder pathFinder = new PathFinder();
         new Thread(new TerminalInputListener(observer)).start();
-        SwingUtilities.invokeLater(() -> new BackgroundFrame(observer, mazeData, pathList, pathFinder).setVisible(true));
+        SwingUtilities.invokeLater(() -> new BackgroundFrame(observer, mazeData, pathData, pathFinder).setVisible(true));
               
     }
     

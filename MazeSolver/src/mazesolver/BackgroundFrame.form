@@ -124,10 +124,8 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="chooseStartButton" alignment="0" max="32767" attributes="0"/>
                       <Component id="chooseEndButton" alignment="1" max="32767" attributes="0"/>
-                      <Component id="jLabel2" alignment="0" max="32767" attributes="0"/>
                       <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
                       <Component id="jLabel3" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jLabel4" alignment="0" max="32767" attributes="0"/>
                       <Component id="findPathButton1" alignment="0" max="32767" attributes="0"/>
                       <Component id="Restart" alignment="0" max="32767" attributes="0"/>
                       <Component id="Save" alignment="0" max="32767" attributes="0"/>
@@ -147,11 +145,7 @@
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="149" max="32767" attributes="0"/>
+                  <EmptySpace pref="199" max="32767" attributes="0"/>
                   <Component id="Save" min="-2" pref="41" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="Restart" min="-2" pref="41" max="-2" attributes="0"/>
@@ -190,20 +184,10 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Przebyta drogra:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel2">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Pokonane zakr&#x119;ty:"/>
+            <Property name="text" type="java.lang.String" value="Przebyta droga:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="0"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
             <Property name="text" type="java.lang.String" value="0"/>
           </Properties>

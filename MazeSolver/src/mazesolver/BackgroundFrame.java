@@ -26,11 +26,12 @@ public class BackgroundFrame extends javax.swing.JFrame implements MazeDataObser
     private MazeReaderObserver observer;
     private MazeData mazeData;
     private MazePanel mazePanel;
-    private LinkedList<MazeElement> pathList;
+    //private LinkedList<MazeElement> pathList;
+    private PathData pathData;
     private PathFinder pathFinder;
    
-    public BackgroundFrame(MazeReaderObserver observer, MazeData mazeData, LinkedList<MazeElement> pathList, PathFinder pathFinder) {
-        this.pathList = pathList;
+    public BackgroundFrame(MazeReaderObserver observer, MazeData mazeData, PathData pathData, PathFinder pathFinder) {
+        this.pathData = pathData;
         this.pathFinder = pathFinder;
         this.observer = observer;
         this.mazeData = mazeData;
@@ -52,13 +53,9 @@ public class BackgroundFrame extends javax.swing.JFrame implements MazeDataObser
         toolbarPanel.setVisible(false);
         mazeVizualizationPanel.setVisible(false);
         jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
-        jLabel2.setHorizontalAlignment(SwingConstants.CENTER);
         jLabel3.setHorizontalAlignment(SwingConstants.CENTER);
-        jLabel4.setHorizontalAlignment(SwingConstants.CENTER);
         jLabel1.setVisible(false);
-        jLabel2.setVisible(false);
         jLabel3.setVisible(false);
-        jLabel4.setVisible(false);
         Restart.setVisible(false);
         Save.setVisible(false);
         jScrollPane1.setVisible(false);
@@ -82,9 +79,7 @@ public class BackgroundFrame extends javax.swing.JFrame implements MazeDataObser
         chooseEndButton = new javax.swing.JButton();
         Restart = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         findPathButton1 = new javax.swing.JButton();
         Save = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -148,13 +143,9 @@ public class BackgroundFrame extends javax.swing.JFrame implements MazeDataObser
             }
         });
 
-        jLabel1.setText("Przebyta drogra:");
-
-        jLabel2.setText("Pokonane zakręty:");
+        jLabel1.setText("Przebyta droga:");
 
         jLabel3.setText("0");
-
-        jLabel4.setText("0");
 
         findPathButton1.setText("Znajdź ścieżkę");
         findPathButton1.setMaximumSize(new java.awt.Dimension(122, 23));
@@ -183,10 +174,8 @@ public class BackgroundFrame extends javax.swing.JFrame implements MazeDataObser
                 .addGroup(toolbarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(chooseStartButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(chooseEndButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(findPathButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Restart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Save, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -203,11 +192,7 @@ public class BackgroundFrame extends javax.swing.JFrame implements MazeDataObser
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 199, Short.MAX_VALUE)
                 .addComponent(Save, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Restart, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -293,10 +278,6 @@ public class BackgroundFrame extends javax.swing.JFrame implements MazeDataObser
     }//GEN-LAST:event_chooseEndButtonActionPerformed
 
     private void findPathButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findPathButton1ActionPerformed
-        jLabel1.setVisible(true);
-        jLabel2.setVisible(true);
-        jLabel3.setVisible(true);
-        jLabel4.setVisible(true);
         chooseStartButton.setVisible(false);
         chooseEndButton.setVisible(false);
         findPathButton1.setVisible(false);
@@ -306,24 +287,25 @@ public class BackgroundFrame extends javax.swing.JFrame implements MazeDataObser
         System.out.println("Find path");
         
         try {
-            pathFinder.findPath(mazeData, pathList);
+            pathFinder.findPath(mazeData, pathData);
             
         } catch (IOException ex) {System.err.println(ex);}
         
+        jLabel3.setText(String.valueOf(pathData.size() -1));
+        jLabel1.setVisible(true);
+        jLabel3.setVisible(true);
         System.out.println("Path was found");   
     }//GEN-LAST:event_findPathButton1ActionPerformed
 
     private void SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveActionPerformed
         MazeSaver mazeSaver = new MazeSaver();
-        mazeSaver.saveToFile(pathList);
-        System.out.println("Path was saved");  
+        mazeSaver.saveToFile(pathData);
     }//GEN-LAST:event_SaveActionPerformed
 
     private void RestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RestartActionPerformed
         jLabel1.setVisible(false);
-        jLabel2.setVisible(false);
         jLabel3.setVisible(false);
-        jLabel4.setVisible(false);
+        
         chooseStartButton.setVisible(true);
         chooseEndButton.setVisible(true);
         findPathButton1.setVisible(true);
@@ -331,7 +313,7 @@ public class BackgroundFrame extends javax.swing.JFrame implements MazeDataObser
         Save.setVisible(false);
 
         mazeData.forgetFoundPath();
-        pathList.clear();
+        pathData.clear();
 
         System.out.println("Restart");
     }//GEN-LAST:event_RestartActionPerformed
@@ -365,9 +347,7 @@ public void dataChanged(MazeData mazeData) {
     private javax.swing.JFileChooser fileChooser;
     private javax.swing.JButton findPathButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel mazeVizualizationPanel;
     private javax.swing.JPanel menuPanel;

@@ -22,17 +22,17 @@ public class BinaryMazeSaver extends MazeSaver {
     }
 
     @Override
-    public void saveToFile(LinkedList<MazeElement> pathList) {
+    public void saveToFile(PathData pathData) {
         try (FileOutputStream fos = new FileOutputStream(filePath, true)) {
-            if (!pathList.isEmpty()) {
+            if (pathData.size() != 0) {
                 writeSolutionHeader(fos);
 
-                if (pathList.size() > 1) {
-                    Direction currentDirection = determineDirection(pathList.get(0), pathList.get(1));
+                if (pathData.size() > 1) {
+                    Direction currentDirection = determineDirection(pathData.get(0), pathData.get(1));
                     int steps = 1;
 
-                    for (int i = 1; i < pathList.size() - 1; i++) {
-                        Direction nextDirection = determineDirection(pathList.get(i), pathList.get(i + 1));
+                    for (int i = 1; i < pathData.size() - 1; i++) {
+                        Direction nextDirection = determineDirection(pathData.get(i), pathData.get(i + 1));
                         if (nextDirection == currentDirection) {
                             steps++;
                         } else {

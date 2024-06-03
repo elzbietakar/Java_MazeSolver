@@ -5,17 +5,16 @@
 package mazesolver;
 
 import java.io.IOException;
-import java.util.LinkedList;
 
 public class PathFinder {
     
-    public void findPath(MazeData mazeData, LinkedList<MazeElement> pathList) throws IOException {
+    public void findPath(MazeData mazeData, PathData pathData) throws IOException {
         
         MazeElement nextElement, currentElement;
-        pathList.add(mazeData.getStartElement());
+        pathData.add(mazeData.getStartElement());
         mazeData.getStartElement().setIsVisited(true);
-        while (!pathList.getLast().equals(mazeData.getEndElement())) { 
-            currentElement = pathList.getLast();
+        while (!pathData.getLast().equals(mazeData.getEndElement())) { 
+            currentElement = pathData.getLast();
             int row = currentElement.getRow();
             int col = currentElement.getCol();
            
@@ -25,7 +24,7 @@ public class PathFinder {
                 
                 if (isValid(nextElement)) {
                     nextElement.setIsVisited(true);
-                    pathList.add(nextElement);
+                    pathData.add(nextElement);
                     System.out.println("ADD: (" + nextElement.getRow() + ", " + nextElement.getCol() + ")");
                     validNextElementFound = true;
                     
@@ -34,12 +33,15 @@ public class PathFinder {
             }
             if (validNextElementFound == false) {
                 System.out.println("REMOVE: (" + currentElement.getRow() + ", " + currentElement.getCol() + ")");
-                pathList.removeLast();
+                pathData.removeLast();
             }            
         }
-        for (MazeElement p : pathList)
+        for (int i = 0; i < pathData.size(); i++) {
+            MazeElement p = pathData.get(i);
             if (p.getMazeElementType() == MazeElementType.PATH)
                 mazeData.getArrayElement(p.getRow(), p.getCol()).setMazeCellType(MazeElementType.FOUND_PATH);
+        }
+        
         mazeData.manager.notifyObservers(mazeData);
     }
     
