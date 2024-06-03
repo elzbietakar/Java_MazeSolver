@@ -12,7 +12,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.LinkedList;
 
 public class MazeSaver {
 
@@ -51,7 +50,6 @@ public class MazeSaver {
     }
 
     private Direction determineDirection(MazeElement from, MazeElement to) {
-        //System.out.println("from:(" + from.getRow() + ", " + from.getCol() + " to:(" + to.getRow() + ", " + to.getCol());
         if (from.getRow() - 1 == to.getRow()) {
             return Direction.UP;
         } else if (from.getRow() + 1 == to.getRow()) {

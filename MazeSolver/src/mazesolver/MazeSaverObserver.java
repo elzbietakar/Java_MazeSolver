@@ -19,7 +19,6 @@ public class MazeSaverObserver implements FilePathObserver {
     public void updateFilePath(String filePath) {
         MazeSaver saver = MazeSaverFactory.getMazeSaver(filePath);
             saver.saveToFile(pathData);
-
         }
     }
 

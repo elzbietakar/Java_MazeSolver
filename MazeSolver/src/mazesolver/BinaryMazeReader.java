@@ -11,6 +11,7 @@ public class BinaryMazeReader extends MazeReader {
 
     @Override
     public void read(MazeData mazeData) throws IOException {
+        mazeData.resetStartEndElements();
         try (FileInputStream fis = new FileInputStream(super.filePath)) {
             // Read file header
             int fileId = readInt(fis);
@@ -69,13 +70,15 @@ public class BinaryMazeReader extends MazeReader {
                 }
             }
 
-            // Set start and end elements
+        // Set start and end elements
         MazeElement startElement = new MazeElement(entryY, entryX, 'P');
         MazeElement endElement = new MazeElement(exitY, exitX, 'K');
         mazeData.setStartElement(startElement);
         mazeData.setEndElement(endElement);
         mazeData.setArrayElement(entryY, entryX, startElement);
         mazeData.setArrayElement(exitY, exitX, endElement);
+        
+        mazeData.manager.notifyObservers(mazeData);  
         }
     }
 
