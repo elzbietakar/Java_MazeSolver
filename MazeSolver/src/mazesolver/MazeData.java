@@ -39,8 +39,8 @@ public class MazeData {
             int row = startElement.getRow();
             int col = startElement.getCol();
             
-            if (newStartElement.isCorner(rows, cols)) {
-                throw new IllegalArgumentException("Invalid startElement position - corner");
+            if (! hasExit(newStartElement)) {
+                throw new IllegalArgumentException("Invalid startElement position - impossible to move");
             }
             
             if (newStartElement.equals(this.endElement)) {
@@ -64,8 +64,8 @@ public class MazeData {
             int row = endElement.getRow();
             int col = endElement.getCol();
             
-            if (newEndElement.isCorner(rows, cols)) {
-                throw new IllegalArgumentException("Invalid endElement position - corner");
+            if (! hasExit(newEndElement)) {
+                throw new IllegalArgumentException("Invalid endElement position - impossible to move");
             }
             
             if (newEndElement.equals(this.startElement)) {
@@ -105,9 +105,22 @@ public class MazeData {
             }
     }
 
+     private boolean hasExit(MazeElement mazeElement) {
+        int row = mazeElement.getRow();
+        int col = mazeElement.getCol();
+
+        return isPath(row + 1, col) || isPath(row - 1, col) || isPath(row, col + 1) || isPath(row, col - 1);
+    }
+
+    private boolean isPath(int row, int col) {
+        MazeElement element = getArrayElement(row, col);
+        return element != null && element.getMazeElementType() == MazeElementType.PATH;
+    }
+     
     private int rows;
     private int cols;
     private MazeElement startElement;
     private MazeElement endElement; 
     private MazeElement[][] elementsArray;    
+
 }
